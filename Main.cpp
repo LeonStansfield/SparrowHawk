@@ -34,11 +34,12 @@ int main() {
     auto obj3 = std::make_unique<Object>("Object 3", Vector3{ 0.0f, 3.0f, 0.0f });
     auto obj4 = std::make_unique<Object>("Object 4", Vector3{ 0.0f, -3.0f, 0.0f });
 
-    root->addChild(std::move(obj3));
-    root->addChild(std::move(obj4));
+    root->getChild(0)->addChild(std::move(obj3));
+    root->getChild(1)->addChild(std::move(obj4));
 
     // Ready
     root->ready();
+    root->printNodeTree();
 
     while (!WindowShouldClose()) {
         // Update

@@ -8,12 +8,9 @@ public:
     std::string modelPath;
     Model model;
 
-    MeshInstance(std::string name, Vector3 position, std::string modelPath);
+    MeshInstance(std::string name, Vector3 globalPosition, std::string modelPath);
 
     void ready() override;
 
     void draw() const override;
-
-private:
-    void loadModel();
 };
