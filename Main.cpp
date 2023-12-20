@@ -3,79 +3,8 @@
 #include <memory>
 #include "raylib.h"
 #include "raymath.h"
-
-class Object {
-public:
-    std::string name;
-    Vector3 position;
-
-    Object(std::string name, Vector3 position) : name(std::move(name)), position(position) {}
-
-    void addChild(std::unique_ptr<Object> child) {
-        children.push_back(std::move(child));
-    }
-
-    virtual void ready() {
-        std::cout << "Object is ready: " << name << std::endl;
-
-        // Ready children
-        for (auto& child : children) {
-            child->ready();
-        }
-    }
-
-    virtual void update() {
-        std::cout << "Updating object: " << name << std::endl;
-
-        // Update this object's logic
-
-        // Update children
-        for (auto& child : children) {
-            child->update();
-        }
-    }
-
-    virtual void draw() const {
-        // Draw this object
-
-        // Draw children
-        for (const auto& child : children) {
-            child->draw();
-        }
-    }
-
-private:
-    std::vector<std::unique_ptr<Object>> children;
-};
-
-class MeshInstance : public Object {
-public:
-    std::string modelPath;
-    Model model;
-
-    MeshInstance(std::string name, Vector3 position, std::string modelPath)
-        : Object(std::move(name), position), modelPath(std::move(modelPath)) {}
-
-    void ready() override {
-        Object::ready();
-        loadModel();
-    }
-
-    void draw() const override {
-        std::cout << "Drawing mesh instance: " << name << std::endl;
-        // Draw this mesh instance
-        DrawModel(model, position, 1.0f, WHITE);
-
-        // Draw children
-        Object::draw();
-    }
-
-private:
-    void loadModel() {
-        // Load the model from file
-        model = LoadModel(modelPath.c_str());
-    }
-};
+#include "Object.h"
+#include "MeshInstance.h"
 
 int main() {
     // Initialization
@@ -94,26 +23,26 @@ int main() {
     SetTargetFPS(60);
 
     // Creating objects
-    auto obj1 = std::make_unique<MeshInstance>("Object 1", Vector3{ 0.0f, 0.0f, 0.0f }, "Assets/Suzanne.glb");
-    auto obj2 = std::make_unique<MeshInstance>("Object 2", Vector3{ 3.0f, 0.0f, 0.0f }, "Assets/Suzanne.glb");
-    auto obj3 = std::make_unique<MeshInstance>("Object 3", Vector3{ -3.0f, 0.0f, 0.0f }, "Assets/Suzanne.glb");
+    auto root = std::make_unique<Object>("Root", Vector3{ 0.0f, 0.0f, 0.0f });
+    auto obj1 = std::make_unique<MeshInstance>("Object 1", Vector3{ 3.0f, 0.0f, 0.0f }, "Assets/Suzanne.glb");
+    auto obj2 = std::make_unique<MeshInstance>("Object 2", Vector3{ -3.0f, 0.0f, 0.0f }, "Assets/Suzanne.glb");
 
     // Building the tree
-    obj1->addChild(std::move(obj2));
-    obj1->addChild(std::move(obj3));
+    root->addChild(std::move(obj1));
+    root->addChild(std::move(obj2));
 
-    auto obj4 = std::make_unique<Object>("Object 4", Vector3{ 0.0f, 3.0f, 0.0f });
-    auto obj5 = std::make_unique<Object>("Object 5", Vector3{ 0.0f, -3.0f, 0.0f });
+    auto obj3 = std::make_unique<Object>("Object 3", Vector3{ 0.0f, 3.0f, 0.0f });
+    auto obj4 = std::make_unique<Object>("Object 4", Vector3{ 0.0f, -3.0f, 0.0f });
 
-    obj1->addChild(std::move(obj4));
-    obj1->addChild(std::move(obj5));
+    root->addChild(std::move(obj3));
+    root->addChild(std::move(obj4));
 
     // Ready
-    obj1->ready();
+    root->ready();
 
     while (!WindowShouldClose()) {
         // Update
-        obj1->update();
+        root->update();
 
         // Draw
         BeginDrawing();
@@ -123,7 +52,7 @@ int main() {
         DrawGrid(10, 1.0f);
 
         // Draw the mesh instance and its children
-        obj1->draw();
+        root->draw();
 
         EndMode3D();
 
