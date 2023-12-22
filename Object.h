@@ -16,10 +16,13 @@ public:
 
     void addChild(std::unique_ptr<Object> child);
 
-    // Get child function
     Object* getChild(int index) const;
 
     void printNodeTree(int depth = 0) const;
+
+    void updateGlobalPosition();
+
+    void setGlobalPosition(Vector3 position);
 
     virtual void ready();
 

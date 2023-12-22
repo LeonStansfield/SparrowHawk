@@ -12,5 +12,7 @@ public:
 
     void ready() override;
 
+    void update() override;
+
     void draw() const override;
 };
