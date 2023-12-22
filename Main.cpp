@@ -24,12 +24,17 @@ int main() {
 
     // Creating objects
     auto root = std::make_unique<Object>("Root", Vector3{ 0.0f, 0.0f, 0.0f });
-    auto obj1 = std::make_unique<MeshInstance>("Object 1", Vector3{ 3.0f, 0.0f, 0.0f }, "Assets/Suzanne.glb");
-    auto obj2 = std::make_unique<MeshInstance>("Object 2", Vector3{ -6.0f, 0.0f, 0.0f }, "Assets/Suzanne.glb");
+
+    auto floor = std::make_unique<MeshInstance>("Floor", Vector3{ 0.0f, 0.0f, 0.0f }, "Assets/Scenes/Scene_1/Floor.glb");
+    auto Suzanne = std::make_unique<MeshInstance>("Suzanne", Vector3{ 0.0f, 1.5f, 0.0f }, "Assets/Scenes/Scene_1/Suzanne.glb");
+    auto Suzanne_1 = std::make_unique<MeshInstance>("Suzanne_1", Vector3{ 3.0f, 1.5f, 0.0f }, "Assets/Scenes/Scene_1/Suzanne.001.glb");
+    auto Suzanne_2 = std::make_unique<MeshInstance>("Suzanne_2", Vector3{ -3.0f, 1.5f, 0.0f }, "Assets/Scenes/Scene_1/Suzanne.002.glb");
 
     // Building the tree
-    root->addChild(std::move(obj1));
-    root->getChild(0)->addChild(std::move(obj2));
+    root->addChild(std::move(floor));
+    root->addChild(std::move(Suzanne));
+    root->addChild(std::move(Suzanne_1));
+    root->addChild(std::move(Suzanne_2));
 
     // Ready
     root->ready();

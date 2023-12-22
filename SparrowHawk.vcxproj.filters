@@ -19,6 +19,12 @@
     <Filter Include="Resource Files\Models">
       <UniqueIdentifier>{4ae83035-46ea-4e77-931b-16c4d0509e59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Scenes">
+      <UniqueIdentifier>{4368c025-2c08-491e-b656-1ff4d161f2b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Scenes\Scene_1">
+      <UniqueIdentifier>{20fc21c8-98cd-40bb-9ac7-8626d41eac05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -32,16 +38,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Suzanne.glb">
-      <Filter>Resource Files\Models</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MeshInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Scenes\Scene_1\Floor.glb">
+      <Filter>Resource Files\Scenes\Scene_1</Filter>
+    </None>
+    <None Include="Assets\Scenes\Scene_1\Suzanne.001.glb">
+      <Filter>Resource Files\Scenes\Scene_1</Filter>
+    </None>
+    <None Include="Assets\Scenes\Scene_1\Suzanne.002.glb">
+      <Filter>Resource Files\Scenes\Scene_1</Filter>
+    </None>
+    <None Include="Assets\Scenes\Scene_1\Suzanne.glb">
+      <Filter>Resource Files\Scenes\Scene_1</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -132,11 +132,14 @@
     <ClCompile Include="Object.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Suzanne.glb" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="MeshInstance.h" />
     <ClInclude Include="Object.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Scenes\Scene_1\Floor.glb" />
+    <None Include="Assets\Scenes\Scene_1\Suzanne.001.glb" />
+    <None Include="Assets\Scenes\Scene_1\Suzanne.002.glb" />
+    <None Include="Assets\Scenes\Scene_1\Suzanne.glb" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

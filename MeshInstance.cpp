@@ -11,12 +11,6 @@ void MeshInstance::ready() {
 
 void MeshInstance::update() {
 	Object::update();
-    if (this->name == "Object 1") {
-        this->localPosition.x += 0.01f;
-    }
-    else if (this->name == "Object 2") {
-        setGlobalPosition(Vector3 {0.0f, -3.0f, 0.0f});
-    }
 }
 
 void MeshInstance::draw() const {
