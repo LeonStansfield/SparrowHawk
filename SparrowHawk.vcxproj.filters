@@ -46,17 +46,22 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Scenes\Scene_1\Floor.glb">
-      <Filter>Resource Files\Scenes\Scene_1</Filter>
-    </None>
-    <None Include="Assets\Scenes\Scene_1\Suzanne.001.glb">
-      <Filter>Resource Files\Scenes\Scene_1</Filter>
-    </None>
     <None Include="Assets\Scenes\Scene_1\Suzanne.002.glb">
+      <Filter>Resource Files\Scenes\Scene_1</Filter>
+    </None>
+    <None Include="Assets\Scenes\Scene_1\Floor.glb">
       <Filter>Resource Files\Scenes\Scene_1</Filter>
     </None>
     <None Include="Assets\Scenes\Scene_1\Suzanne.glb">
       <Filter>Resource Files\Scenes\Scene_1</Filter>
     </None>
+    <None Include="Assets\Scenes\Scene_1\Suzanne.001.glb">
+      <Filter>Resource Files\Scenes\Scene_1</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Scenes\Scene_1\scene.txt">
+      <Filter>Resource Files\Scenes\Scene_1</Filter>
+    </Text>
   </ItemGroup>
 </Project>

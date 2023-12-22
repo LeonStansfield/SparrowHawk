@@ -141,6 +141,9 @@
     <None Include="Assets\Scenes\Scene_1\Suzanne.002.glb" />
     <None Include="Assets\Scenes\Scene_1\Suzanne.glb" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assets\Scenes\Scene_1\scene.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
