@@ -36,6 +36,9 @@
     <ClCompile Include="MeshInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -44,24 +47,8 @@
     <ClInclude Include="MeshInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\Scenes\Scene_1\Suzanne.002.glb">
-      <Filter>Resource Files\Scenes\Scene_1</Filter>
-    </None>
-    <None Include="Assets\Scenes\Scene_1\Floor.glb">
-      <Filter>Resource Files\Scenes\Scene_1</Filter>
-    </None>
-    <None Include="Assets\Scenes\Scene_1\Suzanne.glb">
-      <Filter>Resource Files\Scenes\Scene_1</Filter>
-    </None>
-    <None Include="Assets\Scenes\Scene_1\Suzanne.001.glb">
-      <Filter>Resource Files\Scenes\Scene_1</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Assets\Scenes\Scene_1\scene.txt">
-      <Filter>Resource Files\Scenes\Scene_1</Filter>
-    </Text>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

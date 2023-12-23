@@ -130,19 +130,12 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshInstance.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MeshInstance.h" />
     <ClInclude Include="Object.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\Scenes\Scene_1\Floor.glb" />
-    <None Include="Assets\Scenes\Scene_1\Suzanne.001.glb" />
-    <None Include="Assets\Scenes\Scene_1\Suzanne.002.glb" />
-    <None Include="Assets\Scenes\Scene_1\Suzanne.glb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Assets\Scenes\Scene_1\scene.txt" />
+    <ClInclude Include="SceneManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

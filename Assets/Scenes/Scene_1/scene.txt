@@ -24,10 +24,3 @@ Scale (1.0, 1.0, 1.0)
 Parent Suzanne.001
 End
 
-Object  Suzanne.003
-Location (-3.0, 1.5, -2.0)
-Rotation (0.0, 0.0, 0.0)
-Scale (1.0, 1.0, 1.0)
-Parent Suzanne.002
-End
-

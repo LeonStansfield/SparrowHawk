@@ -2,7 +2,9 @@
 #include "Object.h"
 
 Object::Object(std::string name, Vector3 globalPosition)
-    : name(std::move(name)), globalPosition(globalPosition), parent(nullptr) {}
+    : name(std::move(name)), globalPosition(globalPosition), parent(nullptr) {
+    
+}
 
 // Add child
 void Object::addChild(std::unique_ptr<Object> child) {
