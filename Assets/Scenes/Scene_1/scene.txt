@@ -1,26 +1,33 @@
 Object  Floor
-Location (0.0, 0.0, 0.0)
+Location (0.0, 0.0, -0.0)
 Rotation (0.0, 0.0, 0.0)
 Scale (1.0, 1.0, 1.0)
 End
 
 Object  Suzanne
-Location (0.0, 1.5, 0.0)
+Location (0.0, 1.5, -0.0)
 Rotation (0.0, 0.0, 0.0)
 Scale (1.0, 1.0, 1.0)
 End
 
 Object  Suzanne.001
-Location (3.0, 1.5, 0.0)
+Location (3.0, 1.5, -0.0)
 Rotation (0.0, 0.0, 0.0)
 Scale (1.0, 1.0, 1.0)
 Parent Suzanne
 End
 
 Object  Suzanne.002
-Location (-3.0, 1.5, 0.0)
+Location (-3.0, 1.5, -0.0)
 Rotation (0.0, 0.0, 0.0)
 Scale (1.0, 1.0, 1.0)
-Parent Suzanne
+Parent Suzanne.001
+End
+
+Object  Suzanne.003
+Location (-3.0, 1.5, -2.0)
+Rotation (0.0, 0.0, 0.0)
+Scale (1.0, 1.0, 1.0)
+Parent Suzanne.002
 End
 

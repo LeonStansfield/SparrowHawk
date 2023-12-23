@@ -8,6 +8,11 @@
 #include "Object.h"
 #include "MeshInstance.h"
 
+
+// ISSUES TO FIX
+// 1. Upgrade mesh rendering to make use of rotation an scale
+// 2. Exporting from blender should automatically bake the materials to textures
+// 3. Should be able to create multiple different types of objects
 class SceneManager {
 public:
     SceneManager() {
@@ -130,8 +135,21 @@ int main() {
 
         // Create the object
         auto object = std::make_unique<MeshInstance>(name, location, meshFilepath);
+
         // Add object to tree
-        root->addChild(std::move(object));        
+        if (objectInfo[10] != "") {
+			// Find the parent object
+            auto parent = root->getChildFromName(objectInfo[10]);
+            if (parent != nullptr) {
+				parent->addChild(std::move(object));
+			}
+            else {
+				std::cout << "Parent not found" << std::endl;
+			}
+		}
+        else {
+            root->addChild(std::move(object));
+        }        
     }
 
     // Ready

@@ -1,10 +1,8 @@
 // Object.cpp
 #include "Object.h"
 
-Object::Object(std::string name, Vector3 localPosition)
-    : name(std::move(name)), localPosition(localPosition), parent(nullptr) {
-    this->globalPosition = localPosition;
-}
+Object::Object(std::string name, Vector3 globalPosition)
+    : name(std::move(name)), globalPosition(globalPosition), parent(nullptr) {}
 
 // Add child
 void Object::addChild(std::unique_ptr<Object> child) {
@@ -24,12 +22,19 @@ Object* Object::getChild(int index) const {
 
 // Get child from name
 Object* Object::getChildFromName(std::string name) const {
-	// For each child, if the name matches, return the child
     for (const auto& child : children) {
         if (child->name == name) {
-			return child.get();
-		}
-	}
+            return child.get();
+        }
+
+        // Recursively search for the child in this child's descendants
+        Object* foundChild = child->getChildFromName(name);
+        if (foundChild != nullptr) {
+            return foundChild;
+        }
+    }
+
+    return nullptr; // Child not found
 }
 
 // Print node tree
@@ -46,10 +51,10 @@ void Object::printNodeTree(int depth) const {
 // Update global position
 void Object::updateGlobalPosition() {
     if (parent != nullptr) {
-        this->globalPosition = Vector3Add(parent->globalPosition, localPosition);
+        this->localPosition = Vector3Subtract(globalPosition, parent->globalPosition);
     }
     else {
-        this->globalPosition = localPosition;
+        this->localPosition = globalPosition;
     }
 }
 
