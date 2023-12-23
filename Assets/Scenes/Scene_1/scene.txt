@@ -12,9 +12,11 @@ Object: Suzanne.001
   Location: (3.0, 0.0, 1.5)
   Rotation: (0.0, 0.0, 0.0)
   Scale: (1.0, 1.0, 1.0)
+  Parent: Suzanne
 
 Object: Suzanne.002
   Location: (-3.0, 0.0, 1.5)
   Rotation: (0.0, 0.0, 0.0)
   Scale: (1.0, 1.0, 1.0)
+  Parent: Suzanne
 

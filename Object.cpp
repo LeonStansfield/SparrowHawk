@@ -12,9 +12,24 @@ void Object::addChild(std::unique_ptr<Object> child) {
     children.push_back(std::move(child));
 }
 
+// Clear children
+void Object::clearChildren() {
+    // For each child, call clear children and remove them from this objects children vector
+}
+
 // Get child
 Object* Object::getChild(int index) const {
     return children[index].get();
+}
+
+// Get child from name
+Object* Object::getChildFromName(std::string name) const {
+	// For each child, if the name matches, return the child
+    for (const auto& child : children) {
+        if (child->name == name) {
+			return child.get();
+		}
+	}
 }
 
 // Print node tree
