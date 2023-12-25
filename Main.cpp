@@ -6,6 +6,11 @@
 #include "MeshInstance.h"
 #include "SceneManager.h"
 
+
+// Todo: 
+// Convert blenders rotation vector3 to rotation axis + angle
+// Scale and rotation inheritence
+
 int main() {
     // Initialization
     const int screenWidth = 800;
@@ -27,7 +32,7 @@ int main() {
     std::vector<std::vector<std::string>> objectData = sceneManager.loadScene("Assets/Scenes/Scene_1/scene.txt");
 
     // Create the root object
-    auto root = std::make_shared<Object>("Root", Vector3{ 0.0f, 0.0f, 0.0f });
+    auto root = std::make_shared<Object>("Root", Vector3{ 0.0f, 0.0f, 0.0f }, Vector3 {0.0f, 0.0f, 0.0f}, 0.0f, Vector3 {1.0f, 1.0f, 1.0f});
 
     // For the info in objectData, create the objects
     for (const auto& objectInfo : objectData) {
@@ -38,8 +43,11 @@ int main() {
         Vector3 scale = { std::stof(objectInfo[7]), std::stof(objectInfo[8]), std::stof(objectInfo[9]) };
         std::string meshFilepath = "Assets/Scenes/Scene_1/" + name + ".glb";
 
+        Vector3 axis = Vector3Normalize(rotation);
+        float angle = acosf(axis.y) * RAD2DEG;
+
         // Create the object
-        auto object = std::make_unique<MeshInstance>(name, location, meshFilepath);
+        auto object = std::make_unique<MeshInstance>(name, location, axis, angle, scale, meshFilepath);
 
         // Add object to tree
         if (objectInfo[10] != "") {

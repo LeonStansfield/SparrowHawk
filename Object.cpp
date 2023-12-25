@@ -1,8 +1,8 @@
 // Object.cpp
 #include "Object.h"
 
-Object::Object(std::string name, Vector3 globalPosition)
-    : name(std::move(name)), globalPosition(globalPosition), parent(nullptr) {
+Object::Object(std::string name, Vector3 globalPosition, Vector3 rotationAxis, float rotationAngle, Vector3 scale)
+    : name(std::move(name)), globalPosition(globalPosition), rotationAxis(rotationAxis), rotationAngle(rotationAngle), scale(scale), parent(nullptr) {
     
 }
 
