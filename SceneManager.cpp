@@ -15,7 +15,8 @@ std::vector<std::vector<std::string>> SceneManager::loadScene(std::string sceneN
 
     std::string name = "";
     Vector3 location = { 0.0f, 0.0f, 0.0f };
-    Vector3 rotation = { 0.0f, 0.0f, 0.0f };
+    Vector3 rotation_axis = { 0.0f, 0.0f, 0.0f };
+    float rotation_angle = 0.0f;
     Vector3 scale = { 1.0f, 1.0f, 1.0f };
     std::string parent = "";
 
@@ -42,12 +43,16 @@ std::vector<std::vector<std::string>> SceneManager::loadScene(std::string sceneN
             location = Vector3{ x, y, z };
         }
         // If line starts with 'Rotation'
-        else if (line.find("Rotation") == 0) {
-            // Set the rotation to the values between the brackets
+        else if (line.find("RotationAxis") == 0) {
+            // Set the rotation axis to the values between the brackets
             float x = std::stof(line.substr(line.find("(") + 1, line.find(",") - line.find("(") - 1));
             float y = std::stof(line.substr(line.find(",") + 1, line.find(")") - line.find(",") - 1));
             float z = std::stof(line.substr(line.find_last_of(" ") + 1));
-            rotation = Vector3{ x, y, z };
+            rotation_axis = Vector3{ x, y, z };
+        }
+        else if (line.find("RotationAngle") == 0) {
+            // Set the rotation angle to the rotation angle float
+            rotation_angle = std::stof(line.substr(line.find_last_of(" ") + 1));
         }
         // If line starts with 'Scale'
         else if (line.find("Scale") == 0) {
@@ -69,13 +74,16 @@ std::vector<std::vector<std::string>> SceneManager::loadScene(std::string sceneN
             // All object data is parsed, create object
             std::cout << name << std::endl;
             std::cout << location.x << ", " << location.y << ", " << location.z << std::endl;
-            std::cout << rotation.x << ", " << rotation.y << ", " << rotation.z << std::endl;
+            std::cout << rotation_axis.x << ", " << rotation_axis.y << ", " << rotation_axis.z << std::endl;
+            std::cout << rotation_angle << std::endl;
             std::cout << scale.x << ", " << scale.y << ", " << scale.z << std::endl;
             std::cout << parent << std::endl;
 
             // Add object data to the vector
-            objectData.push_back({ name, std::to_string(location.x), std::to_string(location.y), std::to_string(location.z),
-                std::to_string(rotation.x), std::to_string(rotation.y), std::to_string(rotation.z),
+            objectData.push_back({ name, 
+                std::to_string(location.x), std::to_string(location.y), std::to_string(location.z),
+                std::to_string(rotation_axis.x), std::to_string(rotation_axis.y), std::to_string(rotation_axis.z), 
+                std::to_string(rotation_angle),
                 std::to_string(scale.x), std::to_string(scale.y), std::to_string(scale.z), parent });
         }
     }

@@ -8,7 +8,7 @@
 
 
 // Todo: 
-// Convert blenders rotation vector3 to rotation axis + angle
+// Fix rotation + scale inheritence (on import and in engine)
 
 int main() {
     // Initialization
@@ -38,21 +38,18 @@ int main() {
         // Extract object properties from the vector
         std::string name = objectInfo[0];
         Vector3 location = { std::stof(objectInfo[1]), std::stof(objectInfo[2]), std::stof(objectInfo[3]) };
-        Vector3 rotation = { std::stof(objectInfo[4]), std::stof(objectInfo[5]), std::stof(objectInfo[6]) };
-        Vector3 scale = { std::stof(objectInfo[7]), std::stof(objectInfo[8]), std::stof(objectInfo[9]) };
+        Vector3 axis = { std::stof(objectInfo[4]), std::stof(objectInfo[5]), std::stof(objectInfo[6]) };
+        float angle = std::stof(objectInfo[7]) * (180.0f / PI);
+        Vector3 scale = { std::stof(objectInfo[8]), std::stof(objectInfo[9]), std::stof(objectInfo[10]) };
         std::string meshFilepath = "Assets/Scenes/Scene_1/" + name + ".glb";
-
-        // Set axis and angle (set to up and zero as rotation currently doesnt work)
-        Vector3 axis = Vector3{ 0.0f, 1.0f, 0.0f };
-        float angle = 0;
 
         // Create the object
         auto object = std::make_unique<MeshInstance>(name, location, axis, angle, scale, meshFilepath);
 
         // Add object to tree
-        if (objectInfo[10] != "root") {
+        if (objectInfo[11] != "root") {
 			// Find the parent object
-            auto parent = root->getChildFromName(objectInfo[10]);
+            auto parent = root->getChildFromName(objectInfo[11]);
             if (parent != nullptr) {
 				parent->addChild(std::move(object));
 			}

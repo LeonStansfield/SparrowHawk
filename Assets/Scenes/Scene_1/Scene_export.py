@@ -1,5 +1,20 @@
 import bpy
 import os
+import math
+from mathutils import Matrix
+
+def euler_to_axis_angle(rotation_euler):
+    # Convert Euler angles to rotation matrix
+    rotation_matrix = Matrix.Rotation(rotation_euler[2], 4, 'Z') @ Matrix.Rotation(rotation_euler[1], 4, 'Y') @ Matrix.Rotation(rotation_euler[0], 4, 'X')
+
+    # Get axis-angle representation from rotation matrix
+    axis, angle = rotation_matrix.to_quaternion().to_axis_angle()
+
+    # Convert the axis to raylib coordinate system
+    axis = (axis.x, axis.z, -axis.y)
+
+    return axis, angle
+
 
 def export_mesh_objects_to_glb(output_directory):
     # Create the output directory if it doesn't exist
@@ -48,12 +63,16 @@ def create_scene_info_file(output_directory):
             # Swap Y and Z locations for change to raylib coords
             location_x, location_y, location_z = global_location
             swapped_location = (location_x, location_z, location_y * -1)
+            
+            # Convert euler to axis angle
+            axis, angle = euler_to_axis_angle(obj.rotation_euler)
 
             # Append object information to the list
             object_info.append({
                 'name': obj.name,
                 'location': swapped_location,
-                'rotation_euler': obj.rotation_euler[:],
+                'rotation_axis': axis,
+                'rotation_angle': angle,
                 'scale': global_scale[:]
             })
             
@@ -69,12 +88,15 @@ def create_scene_info_file(output_directory):
         for info in object_info:
             file.write(f"Object  {info['name']}\n")
             file.write(f"Location {info['location']}\n")
-            file.write(f"Rotation {info['rotation_euler']}\n")
+            file.write(f"RotationAxis {info['rotation_axis']}\n")
+            file.write(f"RotationAngle {info['rotation_angle']}\n")
             file.write(f"Scale {info['scale']}\n")
             
             # Check if the object has a parent and record the relationship
             if info['name'] in parent_child_info:
                 file.write(f"Parent {parent_child_info[info['name']]}\n")
+            else:
+                file.write (f"Parent root\n")
             
             file.write(f"End\n")
             file.write("\n")
