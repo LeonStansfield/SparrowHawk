@@ -8,8 +8,8 @@
 
 
 // Todo: 
-// Convert blenders rotation vector3 to rotation axis + angle
 // Scale and rotation inheritence
+// Convert blenders rotation vector3 to rotation axis + angle
 
 int main() {
     // Initialization
@@ -43,8 +43,9 @@ int main() {
         Vector3 scale = { std::stof(objectInfo[7]), std::stof(objectInfo[8]), std::stof(objectInfo[9]) };
         std::string meshFilepath = "Assets/Scenes/Scene_1/" + name + ".glb";
 
-        Vector3 axis = Vector3Normalize(rotation);
-        float angle = acosf(axis.y) * RAD2DEG;
+        // Set axis and angle (set to up and zero as rotation currently doesnt work)
+        Vector3 axis = Vector3{ 0.0f, 1.0f, 0.0f };
+        float angle = 0;
 
         // Create the object
         auto object = std::make_unique<MeshInstance>(name, location, axis, angle, scale, meshFilepath);

@@ -39,8 +39,14 @@ def create_scene_info_file(output_directory):
     for obj in bpy.context.scene.objects:
         # Check if the object is a mesh
         if obj.type == 'MESH':
+            # Store the global transformation matrix
+            global_matrix = obj.matrix_world
+
+            # Apply the global transformation to get global position, rotation, and scale
+            global_location, global_rotation, global_scale = global_matrix.decompose()
+
             # Swap Y and Z locations for change to raylib coords
-            location_x, location_y, location_z = obj.location
+            location_x, location_y, location_z = global_location
             swapped_location = (location_x, location_z, location_y * -1)
 
             # Append object information to the list
@@ -48,16 +54,16 @@ def create_scene_info_file(output_directory):
                 'name': obj.name,
                 'location': swapped_location,
                 'rotation_euler': obj.rotation_euler[:],
-                'scale': obj.scale[:]
+                'scale': global_scale[:]
             })
-
+            
             # Check if the object has a parent
             if obj.parent:
                 parent_name = obj.parent.name
                 child_name = obj.name
                 parent_child_info[child_name] = parent_name
 
-    # Write object information and parent-child relationships to a text file
+    # Write object information to a text file
     scene_info_filename = os.path.join(output_directory, "scene.txt")
     with open(scene_info_filename, 'w') as file:
         for info in object_info:
@@ -65,11 +71,11 @@ def create_scene_info_file(output_directory):
             file.write(f"Location {info['location']}\n")
             file.write(f"Rotation {info['rotation_euler']}\n")
             file.write(f"Scale {info['scale']}\n")
-
+            
             # Check if the object has a parent and record the relationship
             if info['name'] in parent_child_info:
                 file.write(f"Parent {parent_child_info[info['name']]}\n")
-
+            
             file.write(f"End\n")
             file.write("\n")
 

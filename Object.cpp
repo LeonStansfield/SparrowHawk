@@ -50,10 +50,10 @@ void Object::printNodeTree(int depth) const {
 	}
 }
 
-// Update global position
+// Update global position -- UPDATE THIS so that the global position is effected by the parents scale
 void Object::updateGlobalPosition() {
     if (parent != nullptr) {
-        this->localPosition = Vector3Subtract(globalPosition, parent->globalPosition);
+        this->localPosition = Vector3Subtract(this->localPosition, parent->globalPosition);
     }
     else {
         this->localPosition = globalPosition;
@@ -69,6 +69,48 @@ void Object::setGlobalPosition(Vector3 position) {
 		this->localPosition = position;
 	}
 
+}
+
+Vector3 Object::getGlobalPosition() const {
+	return globalPosition;
+}
+
+void Object::setLocalPosition(Vector3 position) {
+	this->localPosition = position;
+    if (parent != nullptr) {
+		this->globalPosition = Vector3Add(position, parent->globalPosition);
+	}
+    else {
+		this->globalPosition = position;
+	}
+}
+
+Vector3 Object::getLocalPosition() const {
+	return localPosition;
+}
+
+void Object::setRotationAxis(Vector3 rotationAxis) {
+	this->rotationAxis = rotationAxis;
+}
+
+Vector3 Object::getRotationAxis() const {
+	return rotationAxis;
+}
+
+void Object::setRotationAngle(float angle) {
+	this->rotationAngle = angle;
+}
+
+float Object::getRotationAngle() const {
+	return rotationAngle;
+}
+
+void Object::setScale(Vector3 scale) {
+    this->scale = scale;
+}
+
+Vector3 Object::getScale() {
+	return scale;
 }
 
 // Ready
