@@ -11,6 +11,16 @@ void MeshInstance::ready() {
 
 void MeshInstance::update() {
 	Object::update();
+
+    if (this->name == "Suzanne.001") {
+        this->setLocalPosition(Vector3Add(this->localPosition, Vector3{ 0.0f, 0.01f, 0.0f }));
+    }
+    if (this->name == "Cube") {
+		this->setLocalPosition(Vector3Add(this->localPosition, Vector3{ 0.0f, 0.0f, 0.01f }));
+	}
+    if (this->name == "Cube.001") {
+        this->setLocalPosition(Vector3Add(this->localPosition, Vector3{ 0.0f, 0.0f, -0.01f }));
+    }
 }
 
 void MeshInstance::draw() const {

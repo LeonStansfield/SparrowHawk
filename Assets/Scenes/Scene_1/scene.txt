@@ -1,46 +1,56 @@
 Object  Floor
 Location (0.0, 0.0, -0.0)
-Rotation (0.0, 0.0, 0.0)
+RotationAxis (0.0, 0.0, -1.0)
+RotationAngle 0.0
 Scale (1.0, 1.0, 1.0)
+Parent root
 End
 
 Object  Suzanne
 Location (0.0, 2.5, -0.0)
-Rotation (0.0, 0.0, 0.0)
+RotationAxis (0.0, 0.0, -1.0)
+RotationAngle 0.0
 Scale (0.5, 0.5, 0.5)
+Parent root
 End
 
 Object  Suzanne.001
 Location (2.0, 2.125, -0.0)
-Rotation (0.0, 0.0, 0.0)
+RotationAxis (0.0, 0.0, -1.0)
+RotationAngle 0.0
 Scale (0.625, 0.625, 0.625)
 Parent Suzanne
 End
 
 Object  Suzanne.002
 Location (-2.0, 1.8125, -0.0)
-Rotation (0.0, 0.0, 0.0)
+RotationAxis (0.0, 0.0, -1.0)
+RotationAngle 0.0
 Scale (0.3125, 0.3125, 0.3125)
 Parent Suzanne.001
 End
 
 Object  Cube
 Location (0.0, 1.0, -0.0)
-Rotation (0.0, 0.0, 0.0)
+RotationAxis (0.0, 0.0, -1.0)
+RotationAngle 0.0
 Scale (1.0, 1.0, 1.0)
+Parent root
 End
 
 Object  Cube.001
 Location (-2.0, 1.0, -0.0)
-Rotation (0.0, 0.0, 0.0)
+RotationAxis (0.0, 0.0, -1.0)
+RotationAngle 0.0
 Scale (0.5, 0.5, 0.5)
 Parent Cube
 End
 
 Object  Cube.002
 Location (2.0, 1.0, -0.0)
-Rotation (0.0, 0.0, 0.0)
-Scale (0.5, 0.5, 0.5)
+RotationAxis (-0.0, -1.0, 0.0)
+RotationAngle 2.356196165084839
+Scale (0.4999999701976776, 0.4999999701976776, 0.5)
 Parent Cube
 End
 

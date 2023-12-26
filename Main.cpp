@@ -8,7 +8,6 @@
 
 
 // Todo: 
-// Scale and rotation inheritence
 // Convert blenders rotation vector3 to rotation axis + angle
 
 int main() {
@@ -51,7 +50,7 @@ int main() {
         auto object = std::make_unique<MeshInstance>(name, location, axis, angle, scale, meshFilepath);
 
         // Add object to tree
-        if (objectInfo[10] != "") {
+        if (objectInfo[10] != "root") {
 			// Find the parent object
             auto parent = root->getChildFromName(objectInfo[10]);
             if (parent != nullptr) {

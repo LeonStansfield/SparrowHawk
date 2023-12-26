@@ -1,9 +1,9 @@
 // Object.cpp
 #include "Object.h"
 
-Object::Object(std::string name, Vector3 globalPosition, Vector3 rotationAxis, float rotationAngle, Vector3 scale)
-    : name(std::move(name)), globalPosition(globalPosition), rotationAxis(rotationAxis), rotationAngle(rotationAngle), scale(scale), parent(nullptr) {
-    
+Object::Object(std::string name, Vector3 localPosition, Vector3 rotationAxis, float rotationAngle, Vector3 scale)
+    : name(std::move(name)), localPosition(localPosition), rotationAxis(rotationAxis), rotationAngle(rotationAngle), scale(scale), parent(nullptr) {
+    globalPosition = localPosition;
 }
 
 // Add child
@@ -50,25 +50,15 @@ void Object::printNodeTree(int depth) const {
 	}
 }
 
-// Update global position -- UPDATE THIS so that the global position is effected by the parents scale
-void Object::updateGlobalPosition() {
+// Update both position variables (ensures the local, global and parents positions are all in sync)
+// ISUE WITH INHERITING LOCAL POSITION. Seems to be constantly updating local position based on global position
+void Object::updatePositions() {
     if (parent != nullptr) {
-        this->localPosition = Vector3Subtract(this->localPosition, parent->globalPosition);
+        this->globalPosition = Vector3Add(parent->globalPosition, localPosition);
     }
     else {
-        this->localPosition = globalPosition;
+        this->globalPosition = localPosition;
     }
-}
-
-void Object::setGlobalPosition(Vector3 position) {
-    this->globalPosition = position;
-    if (parent != nullptr) {
-		this->localPosition = Vector3Subtract(position, parent->globalPosition);
-	}
-    else {
-		this->localPosition = position;
-	}
-
 }
 
 Vector3 Object::getGlobalPosition() const {
@@ -115,7 +105,13 @@ Vector3 Object::getScale() {
 
 // Ready
 void Object::ready() {
-    this->updateGlobalPosition();
+    // Set the local position based off the parent objects position
+    if (parent != nullptr) {
+		this->localPosition = Vector3Subtract(globalPosition, parent->globalPosition);
+	}
+    else {
+		this->localPosition = globalPosition;
+	}
 
     std::cout << "Object is ready: " << name << std::endl;
 
@@ -128,7 +124,7 @@ void Object::ready() {
 // Update
 void Object::update() {
     // Update this object's logic
-    this->updateGlobalPosition();
+    this->updatePositions();
 
     // Update children
     for (auto& child : children) {

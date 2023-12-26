@@ -8,7 +8,7 @@ public:
     std::string modelPath;
     Model model;
 
-    MeshInstance(std::string name, Vector3 globalPosition, Vector3 rotationAxis, float rotationAngle, Vector3 scale, std::string modelPath);
+    MeshInstance(std::string name, Vector3 localPosition, Vector3 rotationAxis, float rotationAngle, Vector3 scale, std::string modelPath);
 
     void ready() override;
 

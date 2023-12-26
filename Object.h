@@ -15,7 +15,7 @@ public:
     float rotationAngle;
     Vector3 scale;
 
-    Object(std::string name, Vector3 globalPosition, Vector3 rotationAxis, float rotationAngle, Vector3 scale);
+    Object(std::string name, Vector3 localPosition, Vector3 rotationAxis, float rotationAngle, Vector3 scale);
 
     void addChild(std::unique_ptr<Object> child);
 
@@ -27,7 +27,7 @@ public:
 
     void printNodeTree(int depth = 0) const;
 
-    void updateGlobalPosition();
+    void updatePositions();
 
     void setGlobalPosition(Vector3 position);
 
